@@ -40,11 +40,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        paddingTop: 44,
         padding: 8,
+        gap: 20
     },
     header: {
-        fontSize: 18,
+        fontSize: 28,
         fontWeight: 'bold',
         textAlign: 'center',
     },
