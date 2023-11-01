@@ -1,77 +1,62 @@
-import React, { useState } from 'react';
+import { Button, Platform, Text, Vibration, View, SafeAreaView, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import Slider from '@react-native-community/slider'
 
-import {
-  Button,
-  Platform,
-  Text,
-  Vibration,
-  View,
-  SafeAreaView,
-  StyleSheet,
-  TextInput,
-} from 'react-native';
-
-const Separator = () => {
-  return <View style={Platform.OS === 'android' ? styles.separator : null} />;
-};
 
 const App = () => {
-  const ONE_SECOND_IN_MS = 1000;
-  const [Segundos,SetSegundos] = useState(0)
+    const [segundos, setSegundos] = useState(0)
+    const handleSegundos = value => setSegundos(value)
 
+    const Separator = () => <View style={Platform.OS === 'android' ? styles.separator : null} />
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text style={[styles.header, styles.paragraph]}>Vibration API</Text>
-      <View>
-        <Button title="Vibrar" onPress={() => Vibration.vibrate()} />
-      </View>
-      <Separator />
+    return (
+        <SafeAreaView style={styles.container}>
+            <Text style={[styles.header, styles.paragraph]}>Vibration API</Text>
+            <View>
+                <Button title="Vibrar" onPress={() => Vibration.vibrate()} />
+            </View>
 
-      
-  
-  
-  <input type="range" id="num" name="segundos" min="0" max="20"
-  value={Segundos}
-  onChange={SetSegundos}/>
-  
-  
+            <Separator />
+            <Text>Elegir los segundos a vibrar: (de 1 a 5)</Text>
+            <Slider
+                style={{ width: 200, height: 40, width: '100%' }}
+                minimumValue={1}
+                maximumValue={5}
+                step={1}
+                value={segundos}
+                onValueChange={handleSegundos}
+            />
 
-      <Button
-        title="Vibrar Por segundos elegidos"
-        onPress={() => Vibration.vibrate(Segundos)}
-      />
-      <Separator />
-      <Button
-        title="Cancelar vibracao"
-        onPress={() => Vibration.cancel()}
-        color="#FF0000"
-      />
-    </SafeAreaView>
-  );
-};
+            <Button title="Vibrar Por segundos elegidos" onPress={() => Vibration.vibrate(segundos * 1000)} />
+
+            <Separator />
+
+            <Button title="Cancelar vibracao" onPress={() => Vibration.cancel()} color="#FF0000" />
+        </SafeAreaView>
+    )
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingTop: 44,
-    padding: 8,
-  },
-  header: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  paragraph: {
-    margin: 24,
-    textAlign: 'center',
-  },
-  separator: {
-    marginVertical: 8,
-    borderBottomColor: '#737373',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-});
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingTop: 44,
+        padding: 8,
+    },
+    header: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    paragraph: {
+        margin: 24,
+        textAlign: 'center',
+    },
+    separator: {
+        marginVertical: 8,
+        borderBottomColor: '#737373',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+    },
+})
 
-export default App;
+export default App
