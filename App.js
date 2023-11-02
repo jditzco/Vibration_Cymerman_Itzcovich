@@ -11,7 +11,7 @@ const App = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={[styles.header, styles.paragraph]}>Vibration API</Text>
+            <Text style={[styles.header, styles.paragraph]}>Vibración 😎</Text>
             <View>
                 <Button title="Vibrar" onPress={() => Vibration.vibrate()} />
             </View>
